@@ -82,6 +82,14 @@ jobs:
       - name: Pull latest images
         run: |
           docker pull ${{ steps.login-ecr.outputs.registry }}/aswpoc/studentperformance:latest
+      
+      - name: Stop and Remove Existing Container
+        run: |
+          if [ "$(docker ps -aq -f name=mltest)" ]; then
+            echo "Stopping and removing the existing container..."
+            docker stop mltest || true
+            docker rm mltest || true
+          fi   
 
       - name: Run Docker Image to serve users
         run: |
