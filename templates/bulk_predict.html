@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bulk Prediction</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css">
+</head>
+<body>
+    <div class="container mt-5">
+        <h1 class="text-center">Upload CSV for Bulk Prediction</h1>
+        <form method="POST" enctype="multipart/form-data" class="my-4">
+            <div class="mb-3">
+                <label for="file" class="form-label">Choose CSV File</label>
+                <input type="file" name="file" class="form-control" id="file" accept=".csv" required>
+            </div>
+            <button type="submit" class="btn btn-primary">Submit</button>
+        </form>
+        
+        {% if results %}
+        <h2 class="mt-5">Results:</h2>
+        <table class="table table-striped table-bordered">
+            <thead class="thead-dark">
+                <tr>
+                    <th>Gender</th>
+                    <th>Race/Ethnicity</th>
+                    <th>Parental Level of Education</th>
+                    <th>Lunch</th>
+                    <th>Test Preparation Course</th>
+                    <th>Writing Score</th>
+                    <th>Reading Score</th>
+                    <th>Predictions</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for row in results %}
+                <tr>
+                    <td>{{ row['gender'] }}</td>
+                    <td>{{ row['race_ethnicity'] }}</td>
+                    <td>{{ row['parental_level_of_education'] }}</td>
+                    <td>{{ row['lunch'] }}</td>
+                    <td>{{ row['test_preparation_course'] }}</td>
+                    <td>{{ row['writing_score'] }}</td>
+                    <td>{{ row['reading_score'] }}</td>
+                    <td>{{ row['Predictions'] }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        {% endif %}
+    </div>
+</body>
+</html>

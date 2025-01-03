@@ -8,7 +8,7 @@ class PredictPipeline:
     def __init__(self):
         pass
 
-    def predict(self,features):
+    def predict(self,features_or_file):
         try:
             model_path=os.path.join("artifacts","model.pkl")
             preprocessor_path=os.path.join('artifacts','proprocessor.pkl')
@@ -16,7 +16,17 @@ class PredictPipeline:
             model=load_object(file_path=model_path)
             preprocessor=load_object(file_path=preprocessor_path)
             print("After Loading")
-            data_scaled=preprocessor.transform(features)
+            
+            # Check if input is a file path or a DataFrame
+            if isinstance(features_or_file, str):  # CSV file path
+                data = pd.read_csv(features_or_file)
+            elif isinstance(features_or_file, pd.DataFrame):  # DataFrame
+                data = features_or_file
+            else:
+                raise ValueError("Input must be a DataFrame or CSV file path.")
+            
+            
+            data_scaled=preprocessor.transform(data)
             preds=model.predict(data_scaled)
             return preds
         
