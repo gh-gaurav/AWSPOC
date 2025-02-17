@@ -130,7 +130,7 @@ http://<EC2_PUBLIC_IP>:5000
 This guide outlines how to deploy an ML model using Docker, GitHub Actions, and AWS services. By following these steps, you can achieve a fully automated CI/CD pipeline and deploy your ML model efficiently on AWS EC2.
 
 ## Author
-[Your Name]
+[Gaurav Shrivastava]
 
 ## License
 This project is licensed under the MIT License.
